@@ -8,6 +8,7 @@
 ModulePlayer::ModulePlayer(Application* app, bool start_enabled) : Module(app, start_enabled), vehicle(NULL)
 {
 	turn = acceleration = brake = 0.0f;
+	nitro = 100.0f;
 }
 
 ModulePlayer::~ModulePlayer()
@@ -148,6 +149,15 @@ update_status ModulePlayer::Update(float dt)
 		brake = BRAKE_POWER;
 	}
 
+	if (acceleration != 0.0f && nitro > 1.0f && App->input->GetKey(SDL_SCANCODE_LCTRL) == KEY_REPEAT)
+	{
+		acceleration = acceleration * 4;
+		nitro--;
+	}
+
+	else if (nitro < 99.9)
+		nitro += 0.1f;
+
 	vehicle->ApplyEngineForce(acceleration);
 	vehicle->Turn(turn);
 	vehicle->Brake(brake);
@@ -155,7 +165,7 @@ update_status ModulePlayer::Update(float dt)
 	vehicle->Render();
 
 	char title[80];
-	sprintf_s(title, "%.1f Km/h", vehicle->GetKmh());
+	sprintf_s(title, "%.1f Km/h      %.1f nitro", vehicle->GetKmh(), nitro);
 	App->window->SetTitle(title);
 
 	return UPDATE_CONTINUE;
