@@ -110,17 +110,12 @@ update_status ModuleCamera3D::Update(float dt)
 		{
 			mat4x4 matrix;
 			bodyToFollow->GetTransform(&matrix);
-			/*X = vec3(matrix[0], matrix[1], matrix[2]);
-			Z = vec3(matrix[4], matrix[5], matrix[6]);
-			X = vec3(matrix[8], matrix[9], matrix[10]);*/
 
-			//App->camera->Position = (vec3(matrix.M[12], matrix.M[13] + 10, matrix.M[14] - 10));
-			//App->camera->Look(vec3(matrix.M[12], matrix.M[13], matrix.M[14] + 10), matrix.translation(), true);
-			//App->camera->Look(App->camera->Position, matrix.translation(), true);
-			//App->camera->Position -= (matrix.translation() - App->camera->Position);
-
-
-			App->camera->Look(vec3(matrix.M[12], matrix.M[13] + 5, matrix.M[14] - 10), matrix.translation(), true);
+			X = vec3(matrix[0], matrix[1], matrix[2]);
+			Y = vec3(matrix[4], matrix[5], matrix[6]);
+			Z = vec3(matrix[8], matrix[9], matrix[10]);
+			
+			App->camera->Look(vec3(matrix.M[12], matrix.M[13] + 5, matrix.M[14]) - Z * 10, matrix.translation(), true);
 		}
 	}
 
