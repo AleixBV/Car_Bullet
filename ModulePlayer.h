@@ -26,4 +26,7 @@ public:
 	float acceleration;
 	float brake;
 	float nitro;
+
+private:
+	bool debug;
 };

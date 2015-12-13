@@ -19,6 +19,8 @@ bool ModulePlayer::Start()
 {
 	LOG("Loading player");
 
+	debug = false;
+
 	VehicleInfo car;
 
 	// Car properties ----------------------------------------
@@ -163,6 +165,16 @@ update_status ModulePlayer::Update(float dt)
 	vehicle->Brake(brake);
 
 	vehicle->Render();
+
+	if (App->input->GetKey(SDL_SCANCODE_F1) == KEY_REPEAT)
+	{
+		debug = !debug;
+	}
+
+	if (debug == false)
+	{
+		App->camera->bodyToFollow = vehicle;
+	}
 
 	char title[80];
 	sprintf_s(title, "%.1f Km/h      %.1f nitro", vehicle->GetKmh(), nitro);
