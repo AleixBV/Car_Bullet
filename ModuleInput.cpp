@@ -30,6 +30,13 @@ bool ModuleInput::Init()
 		ret = false;
 	}
 
+	if (SDL_InitSubSystem(SDL_INIT_JOYSTICK) < 0)
+	{
+		LOG("SDL_JOYSTICK could not initialize! SDL_Error: %s\n", SDL_GetError());
+		ret = false;
+	}
+	jaxis = accel = deaccel = 0;
+
 	return ret;
 }
 
@@ -39,7 +46,10 @@ update_status ModuleInput::PreUpdate(float dt)
 	SDL_PumpEvents();
 
 	const Uint8* keys = SDL_GetKeyboardState(NULL);
-	
+	SDL_Joystick* joystick;
+	SDL_JoystickEventState(SDL_ENABLE);
+	joystick = SDL_JoystickOpen(0);
+
 	for(int i = 0; i < MAX_KEYS; ++i)
 	{
 		if(keys[i] == 1)
@@ -102,6 +112,55 @@ update_status ModuleInput::PreUpdate(float dt)
 			mouse_y_motion = e.motion.yrel / SCREEN_SIZE;
 			break;
 
+			case SDL_JOYAXISMOTION:
+				
+					if (e.jaxis.axis == 0)
+					{
+						if ((e.jaxis.value < -1280) || (e.jaxis.value > 1280))
+						{
+							if (e.jaxis.value < 0)
+							{
+								jaxis = (float)e.jaxis.value / 32768;
+							}
+
+							if (e.jaxis.value > 0)
+							{
+								jaxis = (float)e.jaxis.value / 32767;
+							}
+						}
+						else
+							jaxis = 0;
+					}
+
+					if (e.jaxis.axis == 1)
+					{
+						/* Up-Down movement code goes here */
+					}
+
+					if (e.jaxis.axis == 5)
+					{
+						if (e.jaxis.value > -1280)
+							accel = ((float)e.jaxis.value + 32768) / 32767 / 2;
+						else
+							accel = 0;
+					}
+
+					if (e.jaxis.axis == 4)
+					{
+						if (e.jaxis.value > -1280)
+							deaccel = ((float)e.jaxis.value + 32768) / 32767 / 2;
+						else
+							deaccel = 0;
+					}
+				break;
+
+			case SDL_JOYBUTTONDOWN:
+				if (e.jbutton.button < 0)
+				{
+
+				}
+				break;
+
 			case SDL_QUIT:
 			quit = true;
 			break;
@@ -125,5 +184,6 @@ bool ModuleInput::CleanUp()
 {
 	LOG("Quitting SDL input event subsystem");
 	SDL_QuitSubSystem(SDL_INIT_EVENTS);
+	SDL_QuitSubSystem(SDL_INIT_JOYSTICK);
 	return true;
 }

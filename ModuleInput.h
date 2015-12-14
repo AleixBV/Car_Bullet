@@ -58,6 +58,26 @@ public:
 		return mouse_y_motion;
 	}
 
+	float GetJAxisValue() const
+	{
+		return jaxis;
+	}
+
+	float GetJAccelValue() const
+	{
+		return accel;
+	}
+
+	float GetJDeaccelValue() const
+	{
+		return deaccel;
+	}
+
+	KEY_STATE GetJButtony(int id) const
+	{
+		return j_buttons[id];
+	}
+
 private:
 	KEY_STATE* keyboard;
 	KEY_STATE mouse_buttons[MAX_MOUSE_BUTTONS];
@@ -67,4 +87,8 @@ private:
 	int mouse_x_motion;
 	int mouse_y_motion;
 	//int mouse_z_motion;
+	float jaxis;
+	float accel;
+	float deaccel;
+	KEY_STATE* j_buttons;
 };

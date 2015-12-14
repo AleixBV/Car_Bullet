@@ -113,6 +113,27 @@ update_status ModulePlayer::Update(float dt)
 
 	else
 	{
+		if (App->input->GetJAxisValue() != 0)
+			turn = TURN_DEGREES * -App->input->GetJAxisValue();
+
+		if (App->input->GetJAccelValue() != 0 || App->input->GetJDeaccelValue() != 0)
+		{
+			if (App->input->GetJAccelValue() - App->input->GetJDeaccelValue() > 0)
+			{
+				if (vehicle->GetKmh() < 0.0f)
+					acceleration = MAX_ACCELERATION * 2 * (App->input->GetJAccelValue() - App->input->GetJDeaccelValue());
+				else
+					acceleration = MAX_ACCELERATION * (App->input->GetJAccelValue() - App->input->GetJDeaccelValue());
+			}
+			else
+			{
+				if (vehicle->GetKmh() > 0.0f)
+					acceleration = MAX_ACCELERATION * 2 * (App->input->GetJAccelValue() - App->input->GetJDeaccelValue());
+				else
+					acceleration = (MAX_ACCELERATION / 2) * (App->input->GetJAccelValue() - App->input->GetJDeaccelValue());
+			}
+		}
+
 		if (App->input->GetKey(SDL_SCANCODE_UP) == KEY_REPEAT)
 		{
 			if (vehicle->GetKmh() < 0.0f)
