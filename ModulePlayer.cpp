@@ -106,7 +106,8 @@ update_status ModulePlayer::Update(float dt)
 {
 	turn = acceleration = brake = 0.0f;
 
-	if (App->input->GetKey(SDL_SCANCODE_SPACE) == KEY_REPEAT || App->input->GetKey(SDL_SCANCODE_UP) == KEY_REPEAT && App->input->GetKey(SDL_SCANCODE_DOWN) == KEY_REPEAT)
+	if (App->input->GetKey(SDL_SCANCODE_SPACE) == KEY_REPEAT/* || (App->input->GetKey(SDL_SCANCODE_UP) == KEY_REPEAT && App->input->GetKey(SDL_SCANCODE_DOWN) == KEY_REPEAT) */||
+		App->input->GetJButton(8) == KEY_DOWN)
 	{
 		brake = BRAKE_POWER;
 	}
@@ -134,14 +135,6 @@ update_status ModulePlayer::Update(float dt)
 			}
 		}
 
-		if (App->input->GetKey(SDL_SCANCODE_UP) == KEY_REPEAT)
-		{
-			if (vehicle->GetKmh() < 0.0f)
-				acceleration = MAX_ACCELERATION * 2;
-			else
-				acceleration = MAX_ACCELERATION;
-		}
-
 		if (App->input->GetKey(SDL_SCANCODE_LEFT) == KEY_REPEAT)
 		{
 			if (turn < TURN_DEGREES)
@@ -154,16 +147,27 @@ update_status ModulePlayer::Update(float dt)
 				turn -= TURN_DEGREES;
 		}
 
-		if (App->input->GetKey(SDL_SCANCODE_DOWN) == KEY_REPEAT)
+		if (App->input->GetKey(SDL_SCANCODE_UP) != KEY_REPEAT || App->input->GetKey(SDL_SCANCODE_DOWN) != KEY_REPEAT)
 		{
-			if (vehicle->GetKmh() > 0.0f)
-				acceleration = -MAX_ACCELERATION * 2;
-			else
-				acceleration = -MAX_ACCELERATION / 2;
+			if (App->input->GetKey(SDL_SCANCODE_DOWN) == KEY_REPEAT)
+			{
+				if (vehicle->GetKmh() > 0.0f)
+					acceleration = -MAX_ACCELERATION * 2;
+				else
+					acceleration = -MAX_ACCELERATION / 2;
+			}
+
+			if (App->input->GetKey(SDL_SCANCODE_UP) == KEY_REPEAT)
+			{
+				if (vehicle->GetKmh() < 0.0f)
+					acceleration = MAX_ACCELERATION * 2;
+				else
+					acceleration = MAX_ACCELERATION;
+			}
 		}
 	}
 
-	if (acceleration != 0.0f && nitro > 1.0f && App->input->GetKey(SDL_SCANCODE_LCTRL) == KEY_REPEAT)
+	if (acceleration != 0.0f && nitro > 1.0f && (App->input->GetKey(SDL_SCANCODE_LCTRL) == KEY_REPEAT || App->input->GetJButton(9) == KEY_DOWN))
 	{
 		acceleration = acceleration * 4;
 		nitro--;

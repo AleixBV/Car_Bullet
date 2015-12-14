@@ -9,6 +9,7 @@ ModuleInput::ModuleInput(Application* app, bool start_enabled) : Module(app, sta
 	keyboard = new KEY_STATE[MAX_KEYS];
 	memset(keyboard, KEY_IDLE, sizeof(KEY_STATE) * MAX_KEYS);
 	memset(mouse_buttons, KEY_IDLE, sizeof(KEY_STATE) * MAX_MOUSE_BUTTONS);
+	memset(mouse_buttons, KEY_IDLE, sizeof(KEY_STATE) * 15);
 }
 
 // Destructor
@@ -44,7 +45,7 @@ bool ModuleInput::Init()
 update_status ModuleInput::PreUpdate(float dt)
 {
 	SDL_PumpEvents();
-
+	
 	const Uint8* keys = SDL_GetKeyboardState(NULL);
 	SDL_Joystick* joystick;
 	SDL_JoystickEventState(SDL_ENABLE);
@@ -155,9 +156,22 @@ update_status ModuleInput::PreUpdate(float dt)
 				break;
 
 			case SDL_JOYBUTTONDOWN:
-				if (e.jbutton.button < 0)
+				for (int x = 0; x < 14; x++)
 				{
+					if (e.jbutton.button == x)
+					{
+						j_buttons[x] = KEY_DOWN;
+					}
+				}
+				break;
 
+			case SDL_JOYBUTTONUP:
+				for (int x = 0; x < 14; x++)
+				{
+					if (e.jbutton.button == x)
+					{
+						j_buttons[x] = KEY_UP;
+					}
 				}
 				break;
 

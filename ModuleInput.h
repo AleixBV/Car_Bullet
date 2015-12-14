@@ -73,7 +73,7 @@ public:
 		return deaccel;
 	}
 
-	KEY_STATE GetJButtony(int id) const
+	KEY_STATE GetJButton(int id) const
 	{
 		return j_buttons[id];
 	}
@@ -90,5 +90,5 @@ private:
 	float jaxis;
 	float accel;
 	float deaccel;
-	KEY_STATE* j_buttons;
+	KEY_STATE j_buttons[15];
 };
