@@ -69,7 +69,12 @@ update_status ModuleSceneIntro::Update(float dt)
 {
 	plane->GetTransform(&p.transform);
 	//p.color.Set(0.0f, 0.0f, 0.0f, 0.0f);
-	p.Render();
+	//p.Render();
+
+	Plane floor(0, 1, 0, 0);
+	floor.axis = true;
+	floor.color.Set(255, 0, 0);
+	floor.Render();
 
 	sensor->GetTransform(&s.transform);
 	s.Render();

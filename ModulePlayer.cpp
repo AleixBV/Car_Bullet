@@ -110,7 +110,7 @@ update_status ModulePlayer::Update(float dt)
 {
 	turn = acceleration = brake = 0.0f;
 
-	if (App->input->GetKey(SDL_SCANCODE_SPACE) == KEY_REPEAT/* || (App->input->GetKey(SDL_SCANCODE_UP) == KEY_REPEAT && App->input->GetKey(SDL_SCANCODE_DOWN) == KEY_REPEAT) */||
+	if (App->input->GetKey(SDL_SCANCODE_SPACE) == KEY_REPEAT|| reset ||
 		App->input->GetJButton(8) == KEY_DOWN)
 	{
 		brake = BRAKE_POWER;
@@ -180,11 +180,24 @@ update_status ModulePlayer::Update(float dt)
 	else if (nitro < 99.9)
 		nitro += 0.1f;
 
-	if (reset)
+	if (reset && vehicle->GetKmh() < 0.5f && vehicle->GetKmh() > -0.5f)
 	{
 		deaths++;
+		vehicle->vehicle->getRigidBody()->clearForces();
 		vehicle->SetTransform(&initial_matrix);
-		//vehicle->SetPos(initial_matrix[12], initial_matrix[13], initial_matrix[14]);
+		/*//vehicle->SetPos(initial_matrix[12], initial_matrix[13], initial_matrix[14]);
+		
+		for (int i = vehicle->vehicle->getNumWheels(); i < 0; i--)
+		{
+			//vehicle->vehicle->get
+		}
+		
+		brake = BRAKE_POWER;
+
+		//vehicle->vehicle->getRigidBody()->setInvInertiaDiagLocal(btVector3(0, 0, 0));
+
+		vehicle->vehicle->setCoordinateSystem(0, 0, 0);*/
+
 		reset = false;
 	}
 
