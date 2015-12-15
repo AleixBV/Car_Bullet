@@ -27,7 +27,7 @@ bool ModuleSceneIntro::Start()
 	plane->SetAsSensor(true);
 	plane->collision_listeners.add(this);
 
-	CreateCube(vec3(0, 37, 100), vec3(8, 10, 1), 0.0f, vec3(0, 0, 0), true);
+	CreateCube(vec3(0, 37, 100), vec3(6, 10, 1), 0.0f, vec3(0, 0, 0), true);
 
 
 	CreateCube(vec3(0, 50, 0), vec3(10.0f, 1.0f, 30.0f));
