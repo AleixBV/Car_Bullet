@@ -181,6 +181,25 @@ update_status ModulePlayer::Update(float dt)
 	else if (nitro < 99.9)
 		nitro += 0.1f;
 
+	if ((App->input->GetKey(SDL_SCANCODE_F9) == KEY_REPEAT || App->input->GetJButton(5) == KEY_DOWN))
+	{
+		if (reset_timer == 0)
+			reset_timer = SDL_GetTicks();
+	}
+	else
+		reset_timer = 0;
+
+	if (reset_timer != 0)
+	{
+		if (SDL_GetTicks() - reset_timer > 2500)
+		{
+			reset = true;
+			reset_timer = 0;
+		}
+		else if (SDL_GetTicks() - reset_timer > 500)
+			brake = BRAKE_POWER;
+	}
+
 	if (reset)
 	{
 		deaths++;

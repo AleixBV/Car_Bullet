@@ -29,6 +29,7 @@ public:
 	float nitro;
 	int deaths;
 	bool reset;
+	unsigned int reset_timer;
 	mat4x4 last_checkpoint_matrix;
 	unsigned int checkpoint;
 

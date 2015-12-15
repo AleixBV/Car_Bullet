@@ -138,6 +138,11 @@ update_status ModuleInput::PreUpdate(float dt)
 						/* Up-Down movement code goes here */
 					}
 
+					if (e.jaxis.axis == 2)
+					{
+						//mouse_x_motion = (int)e.jaxis.value / 320;
+					}
+
 					if (e.jaxis.axis == 5)
 					{
 						if (e.jaxis.value > -32000)
