@@ -28,10 +28,11 @@ public:
 
 private:
 	void CreateCube(const vec3& position, const vec3& size, float angle = 0.0f, const vec3& rotAxis = vec3(1, 1, 1), bool sensor = false);
+	void CreateCylinder(const vec3& position, float h, float radius, float angle = 0.0f, const vec3& rotAxis = vec3(1, 1, 1));
 	float CalcAngle(const vec3& axis);
 
 	Cube p;
 	PhysBody3D* plane;
 
-	p2List<Cube*> cubes;
+	p2List<Primitive*> primitives;
 };

@@ -59,12 +59,16 @@ bool ModuleSceneIntro::Start()
 	CreateCube(vec3(-95.03, 28.01, 181.4), vec3(10.0f, 1.0f, 10.0f));
 	CreateCube(vec3(-104.6, 28.01, 181.4), vec3(10.0f, 1.0f, 10.0f));
 	
-	CreateCube(vec3(0.16f, 31.6f, 181.4), vec3(10.0f, 1.0f, 10.0f), 8.98, vec3(0, 0, 1));
-	CreateCube(vec3(0.16f, 31.6f, 181.4), vec3(10.0f, 1.0f, 10.0f), 8.98, vec3(0, 0, 1));
-	CreateCube(vec3(0.16f, 31.6f, 181.4), vec3(10.0f, 1.0f, 10.0f), 8.98, vec3(0, 0, 1));
-	CreateCube(vec3(0.16f, 31.6f, 181.4), vec3(10.0f, 1.0f, 10.0f), 8.98, vec3(0, 0, 1));
-	CreateCube(vec3(0.16f, 31.6f, 181.4), vec3(10.0f, 1.0f, 10.0f), 8.98, vec3(0, 0, 1));
-	CreateCube(vec3(0.16f, 31.6f, 181.4), vec3(10.0f, 1.0f, 10.0f), 8.98, vec3(0, 0, 1));
+	CreateCube(vec3(-114.38, 28, 181.4), vec3(10.0f, 1.0f, 10.0f));
+	CreateCube(vec3(-123.1, 28, 181.4), vec3(10.0f, 1.0f, 10.0f));
+	CreateCube(vec3(-133, 28.1, 181.4), vec3(10.0f, 1.0f, 10.0f), -1.6354, vec3(0, 0, 1));
+	CreateCube(vec3(-142.6, 29.7, 181.4), vec3(10.0f, 1.0f, 10.0f), -16.8073, vec3(0, 0, 1));
+	CreateCube(vec3(-151.9, 33.1, 181.4), vec3(10.0f, 1.0f, 10.0f), -23.6733, vec3(0, 0, 1));
+	CreateCube(vec3(-160.7, 37.1, 181.4), vec3(10.0f, 1.0f, 10.0f), -24.8817, vec3(0, 0, 1));
+	//30
+	CreateCube(vec3(-349, 42.9, 181.52), vec3(320, 1.0, 50));
+	CreateCube(vec3(-349, 55, 155.7), vec3(320, 25, 1.0f));
+	CreateCube(vec3(-349, 55, 207.2), vec3(320, 25, 1.0f));
 
 	return ret;
 }
@@ -74,11 +78,11 @@ bool ModuleSceneIntro::CleanUp()
 {
 	LOG("Unloading Intro scene");
 
-	for (p2List_item<Cube*>* tmp = cubes.getFirst(); tmp != NULL; tmp = tmp->next)
+	for (p2List_item<Primitive*>* tmp = primitives.getFirst(); tmp != NULL; tmp = tmp->next)
 	{
 		delete tmp->data;
 	}
-	cubes.clear();
+	primitives.clear();
 
 	return true;
 }
@@ -109,7 +113,7 @@ update_status ModuleSceneIntro::Update(float dt)
 	}
 
 	//-----------------
-	for (p2List_item<Cube*>* tmp = cubes.getFirst(); tmp != NULL; tmp = tmp->next)
+	for (p2List_item<Primitive*>* tmp = primitives.getFirst(); tmp != NULL; tmp = tmp->next)
 	{
 		tmp->data->Render();
 	}
@@ -153,9 +157,24 @@ void ModuleSceneIntro::CreateCube(const vec3& position, const vec3& size, float 
 	}
 	else
 	{
-		cubes.add(c);
+		primitives.add(c);
 		App->physics->AddBody(*c, 0);
 	}
+
+}
+
+void ModuleSceneIntro::CreateCylinder(const vec3& position, float h, float radius, float angle, const vec3& rotAxis)
+{
+	Cylinder* c = new Cylinder();
+	c->height = h;
+	c->radius = radius;
+	c->SetPos(position.x, position.y, position.z);
+	if (angle != 0.0f)
+		c->SetRotation(angle, rotAxis);
+
+	App->physics->AddBody(*c, 0);
+
+	primitives.add(c);
 }
 
 float ModuleSceneIntro::CalcAngle(const vec3& axis)
