@@ -5,6 +5,7 @@
 #include "Primitive.h"
 
 #define MAX_SNAKE 2
+#define DIAMETER_WORLD 2500
 
 struct PhysBody3D;
 struct PhysMotor3D;

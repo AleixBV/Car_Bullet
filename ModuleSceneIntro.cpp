@@ -20,7 +20,7 @@ bool ModuleSceneIntro::Start()
 	App->camera->Move(vec3(1.0f, 1.0f, 0.0f));
 	App->camera->LookAt(vec3(0, 0, 0));
 
-	p.size = vec3(2000, 0, 2000);
+	p.size = vec3(DIAMETER_WORLD, 0, DIAMETER_WORLD);
 	p.SetPos(0, 2.5f , 0);
 
 	plane = App->physics->AddBody(p, 0.0f);
@@ -93,6 +93,11 @@ update_status ModuleSceneIntro::Update(float dt)
 	Plane floor(0, 1, 0, 0);
 	floor.axis = true;
 	floor.color.Set(255, 0, 0);
+	//-----------------
+	mat4x4 player_pos;
+	App->player->vehicle->GetTransform(&player_pos);
+	floor.SetPos(player_pos.M[12], 0, player_pos.M[14]);
+	//-----------------
 	floor.Render();
 
 	Cube* tmp;
@@ -100,7 +105,7 @@ update_status ModuleSceneIntro::Update(float dt)
 		s.findNode(tmp)->data->Render();
 	else
 	{
-		//WIN!
+		LOG("Win!!");
 	}
 
 	//-----------------
