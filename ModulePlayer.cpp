@@ -181,17 +181,16 @@ update_status ModulePlayer::Update(float dt)
 	else if (nitro < 99.9)
 		nitro += 0.1f;
 
-	if (reset && vehicle->GetKmh() < 0.5f && vehicle->GetKmh() > -0.5f)
+	if (reset)
 	{
 		deaths++;
 		vehicle->vehicle->getRigidBody()->clearForces();
+		vehicle->vehicle->getRigidBody()->clearVelocities();
+
 		if (checkpoint == 0)
 			vehicle->SetTransform(&initial_matrix);
 		else
 			vehicle->SetTransform(&last_checkpoint_matrix);
-
-		//vehicle->SetPos(initial_matrix[12], initial_matrix[13], initial_matrix[14]);
-		//brake = BRAKE_POWER;
 
 		reset = false;
 	}

@@ -345,6 +345,12 @@ public:
 		m_totalForce.setValue(btScalar(0.0), btScalar(0.0), btScalar(0.0));
 		m_totalTorque.setValue(btScalar(0.0), btScalar(0.0), btScalar(0.0));
 	}
+
+	void clearVelocities()
+	{
+		m_linearVelocity = (btVector3(0, 0, 0));
+		m_angularVelocity = (btVector3(0, 0, 0));
+	}
 	
 	void updateInertiaTensor();    
 	
