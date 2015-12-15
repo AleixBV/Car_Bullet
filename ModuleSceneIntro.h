@@ -22,12 +22,18 @@ public:
 	void OnCollision(PhysBody3D* body1, PhysBody3D* body2);
 
 public:
-	Cube sensor_cube;
-	p2List<Cube*>* s;
+	p2List<Cube*> s;
 	p2List<PhysBody3D*>* sensor;
 	unsigned int checkpoint;
+	Cube s;
+	PhysBody3D* sensor;
+
+private:
+	void CreateCube(const vec3& position, const vec3& size, float angle = 0.0f, const vec3& rotAxis = vec3(1, 1, 1));
+	float CalcAngle(const vec3& axis);
+
 	Cube p;
 	PhysBody3D* plane;
 
-	Cube cc1, cc2, cc3, cc4;
+	p2List<Cube*> cubes;
 };
