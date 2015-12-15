@@ -28,17 +28,23 @@ bool ModuleSceneIntro::Start()
 	sensor->collision_listeners.add(this);
 
 	cc1.size.Set(10.0f, 1.0f, 100.0f);
-	cc1.SetPos(0, 0, 0);
+	cc1.SetPos(0, 10, 0);
 	App->physics->AddBody(cc1, 0);
 
-	cc2.size.Set(10.0f, 1.0f, 100.0f);
-	cc2.SetPos(0, 4.4f, 99.5f);
-	cc2.SetRotation(-5.0f, vec3(1, 0, 0));
+	cc2.size.Set(10.0f, 1.0f, 10.0f);
+	cc2.SetPos(0, 9.2f, 54.5f);
+	cc2.SetRotation(10.0f, vec3(1, 0, 0));
 	App->physics->AddBody(cc2, 0);
 
-	cc3.size.Set(10.0f, 1.0f, 100.0f);
-	cc3.SetPos(0, 0, 200);
+	cc3.size.Set(10.0f, 1.0f, 10.0f);
+	cc3.SetPos(0, 7.2f, 63.5f);
+	cc3.SetRotation(15.0f, vec3(1, 0, 0));
 	App->physics->AddBody(cc3, 0);
+
+	cc4.size.Set(10.0f, 1.0f, 10.0f);
+	cc4.SetPos(0, 6.5f, 72.5f);
+	cc4.SetRotation(12.0f, vec3(1, 0, 0));
+	App->physics->AddBody(cc4, 0);
 
 	return ret;
 }
@@ -65,6 +71,7 @@ update_status ModuleSceneIntro::Update(float dt)
 	cc1.Render();
 	cc2.Render();
 	cc3.Render();
+	cc4.Render();
 
 	return UPDATE_CONTINUE;
 }
