@@ -27,6 +27,19 @@ bool ModuleSceneIntro::Start()
 	sensor->SetAsSensor(true);
 	sensor->collision_listeners.add(this);
 
+	cc1.size.Set(10.0f, 1.0f, 100.0f);
+	cc1.SetPos(0, 0, 0);
+	App->physics->AddBody(cc1, 0);
+
+	cc2.size.Set(10.0f, 1.0f, 100.0f);
+	cc2.SetPos(0, 4.4f, 99.5f);
+	cc2.SetRotation(-5.0f, vec3(1, 0, 0));
+	App->physics->AddBody(cc2, 0);
+
+	cc3.size.Set(10.0f, 1.0f, 100.0f);
+	cc3.SetPos(0, 0, 200);
+	App->physics->AddBody(cc3, 0);
+
 	return ret;
 }
 
@@ -47,6 +60,11 @@ update_status ModuleSceneIntro::Update(float dt)
 
 	sensor->GetTransform(&s.transform);
 	s.Render();
+
+	//-----------------
+	cc1.Render();
+	cc2.Render();
+	cc3.Render();
 
 	return UPDATE_CONTINUE;
 }

@@ -24,4 +24,7 @@ public:
 public:
 	Cube s;
 	PhysBody3D* sensor;
+
+
+	Cube cc1, cc2, cc3, cc4;
 };

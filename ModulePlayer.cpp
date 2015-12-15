@@ -26,12 +26,12 @@ bool ModulePlayer::Start()
 	// Car properties ----------------------------------------
 	car.chassis_size.Set(2, 1, 4);
 	car.chassis_offset.Set(0, 1.5, 0);
-	car.mass = 250.0f;
+	car.mass = 300.0f;
 	car.suspensionStiffness = 15.88f;
 	car.suspensionCompression = 0.83f;
 	car.suspensionDamping = 0.88f;
 	car.maxSuspensionTravelCm = 1000.0f;
-	car.frictionSlip = 17.0f;
+	car.frictionSlip = 13.0f;//17.0f;
 	car.maxSuspensionForce = 6000.0f;
 
 	// Wheel properties ---------------------------------------
@@ -52,7 +52,7 @@ bool ModulePlayer::Start()
 	car.wheels = new Wheel[3];
 
 	// FRONT ------------------------
-	car.wheels[0].connection.Set(0, connection_height, half_length + wheel_radius);
+	car.wheels[0].connection.Set(0, connection_height - 0.3f, half_length + wheel_radius);
 	car.wheels[0].direction = direction;
 	car.wheels[0].axis = axis;
 	car.wheels[0].suspensionRestLength = suspensionRestLength;
