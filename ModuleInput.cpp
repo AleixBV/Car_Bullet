@@ -117,7 +117,7 @@ update_status ModuleInput::PreUpdate(float dt)
 				
 					if (e.jaxis.axis == 0)
 					{
-						if ((e.jaxis.value < -1280) || (e.jaxis.value > 1280))
+						if ((e.jaxis.value < -6400) || (e.jaxis.value > 6400))
 						{
 							if (e.jaxis.value < 0)
 							{
@@ -136,6 +136,11 @@ update_status ModuleInput::PreUpdate(float dt)
 					if (e.jaxis.axis == 1)
 					{
 						/* Up-Down movement code goes here */
+					}
+
+					if (e.jaxis.axis == 2)
+					{
+						//mouse_x_motion = (int)e.jaxis.value / 320;
 					}
 
 					if (e.jaxis.axis == 5)

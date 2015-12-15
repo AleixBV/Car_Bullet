@@ -20,19 +20,15 @@ bool ModuleSceneIntro::Start()
 	App->camera->Move(vec3(1.0f, 1.0f, 0.0f));
 	App->camera->LookAt(vec3(0, 0, 0));
 
-	p.size = vec3(200, 0, 200);
-	p.SetPos(0, 2.5f , 0);
+	floor_cube.size = vec3(DIAMETER_WORLD, 0, DIAMETER_WORLD);
+	floor_cube.SetPos(0, 2.5f, 0);
 
-	plane = App->physics->AddBody(p, 0.0f);
-	plane->SetAsSensor(true);
-	plane->collision_listeners.add(this);
+	floor_sensor = App->physics->AddBody(floor_cube, 0.0f);
+	floor_sensor->SetAsSensor(true);
+	floor_sensor->collision_listeners.add(this);
 
-	s.size = vec3(5, 3, 1);
-	s.SetPos(0, 2.5f, 20);
+	CreateCube(vec3(0, 37, 100), vec3(6, 10, 1), 0.0f, vec3(0, 0, 0), true);
 
-	sensor = App->physics->AddBody(s, 0.0f);
-	sensor->SetAsSensor(true);
-	sensor->collision_listeners.add(this);
 
 	CreateCube(vec3(0, 50, 0), vec3(10.0f, 1.0f, 30.0f));
 	//0
@@ -127,17 +123,27 @@ bool ModuleSceneIntro::CleanUp()
 // Update
 update_status ModuleSceneIntro::Update(float dt)
 {
-	plane->GetTransform(&p.transform);
+	//plane->GetTransform(&p.transform);
 	if (App->player->debug)
-		p.Render();
+		floor_cube.Render();
 
 	Plane floor(0, 1, 0, 0);
 	floor.axis = true;
 	floor.color.Set(255, 0, 0);
+	//-----------------
+	mat4x4 player_pos;
+	App->player->vehicle->GetTransform(&player_pos);
+	floor.SetPos(player_pos.M[12], 0, player_pos.M[14]);
+	//-----------------
 	floor.Render();
 
-	sensor->GetTransform(&s.transform);
-	s.Render();
+	Cube* tmp;
+	if(s.at(App->player->checkpoint, tmp))
+		s.findNode(tmp)->data->Render();
+	else
+	{
+		LOG("Win!!");
+	}
 
 	//-----------------
 	for (p2List_item<Primitive*>* tmp = primitives.getFirst(); tmp != NULL; tmp = tmp->next)
@@ -152,13 +158,21 @@ void ModuleSceneIntro::OnCollision(PhysBody3D* body1, PhysBody3D* body2)
 {
 	LOG("Hit!");
 
-	if (body1 == plane && body2 == App->player->vehicle)
+	if (body1 == floor_sensor && body2 == App->player->vehicle)
 	{
 		App->player->reset = true;
 	}
+
+	PhysBody3D* tmp;
+	sensor.at((App->player->checkpoint), tmp);
+	if (body1 == tmp && body2 == App->player->vehicle)
+	{
+		App->player->checkpoint++;
+		App->player->vehicle->GetTransform(&App->player->last_checkpoint_matrix);
+	}
 }
 
-void ModuleSceneIntro::CreateCube(const vec3& position, const vec3& size, float angle, const vec3& rotAxis)
+void ModuleSceneIntro::CreateCube(const vec3& position, const vec3& size, float angle, const vec3& rotAxis, bool is_sensor)
 {
 	Cube* c = new Cube();
 	c->size.Set(size.x, size.y, size.z);
@@ -166,9 +180,20 @@ void ModuleSceneIntro::CreateCube(const vec3& position, const vec3& size, float 
 	if (angle != 0.0f)
 		c->SetRotation(angle, rotAxis);
 
-	App->physics->AddBody(*c, 0);
+	if (is_sensor)
+	{
+		c->color.Set(0, 255, 0);
+		s.add(c);
+		sensor.add(App->physics->AddBody(*c, 0.0f));
+		sensor.getLast()->data->SetAsSensor(true);
+		sensor.getLast()->data->collision_listeners.add(this);
+	}
+	else
+	{
+		primitives.add(c);
+		App->physics->AddBody(*c, 0);
+	}
 
-	primitives.add(c);
 }
 
 void ModuleSceneIntro::CreateSphere(const vec3& position, float radius)

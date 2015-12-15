@@ -5,6 +5,7 @@
 #include "Primitive.h"
 
 #define MAX_SNAKE 2
+#define DIAMETER_WORLD 2500
 
 struct PhysBody3D;
 struct PhysMotor3D;
@@ -22,15 +23,21 @@ public:
 	void OnCollision(PhysBody3D* body1, PhysBody3D* body2);
 
 public:
-	Cube s;
-	PhysBody3D* sensor;
+	p2List<Cube*> s;
+	p2List<PhysBody3D*> sensor;
 
 private:
+<<<<<<< HEAD
 	void CreateCube(const vec3& position, const vec3& size, float angle = 0.0f, const vec3& rotAxis = vec3(1, 1, 1));
 	void CreateSphere(const vec3& position, float radius);
+=======
+	void CreateCube(const vec3& position, const vec3& size, float angle = 0.0f, const vec3& rotAxis = vec3(1, 1, 1), bool sensor = false);
+	void CreateCylinder(const vec3& position, float h, float radius, float angle = 0.0f, const vec3& rotAxis = vec3(1, 1, 1));
+	float CalcAngle(const vec3& axis);
+>>>>>>> origin/master
 
-	Cube p;
-	PhysBody3D* plane;
+	Cube floor_cube;
+	PhysBody3D* floor_sensor;
 
 	p2List<Primitive*> primitives;
 };
