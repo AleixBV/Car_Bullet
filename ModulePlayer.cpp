@@ -90,13 +90,9 @@ bool ModulePlayer::Start()
 	car.wheels[2].steering = false;
 
 	vehicle = App->physics->AddVehicle(car);
-<<<<<<< HEAD
 	vehicle->SetPos(0, 52, 10);
-=======
-	vehicle->SetPos(0, 15, 10);
 
 	vehicle->GetTransform(&initial_matrix);
->>>>>>> origin/master
 	
 	return true;
 }
