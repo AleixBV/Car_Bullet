@@ -23,13 +23,10 @@ public:
 
 public:
 	p2List<Cube*> s;
-	p2List<PhysBody3D*>* sensor;
-	unsigned int checkpoint;
-	Cube s;
-	PhysBody3D* sensor;
+	p2List<PhysBody3D*> sensor;
 
 private:
-	void CreateCube(const vec3& position, const vec3& size, float angle = 0.0f, const vec3& rotAxis = vec3(1, 1, 1));
+	void CreateCube(const vec3& position, const vec3& size, float angle = 0.0f, const vec3& rotAxis = vec3(1, 1, 1), bool sensor = false);
 	float CalcAngle(const vec3& axis);
 
 	Cube p;

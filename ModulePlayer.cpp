@@ -21,7 +21,8 @@ bool ModulePlayer::Start()
 
 	debug = false;
 	reset = false;
-	deaths = 0;
+	deaths = 0; 
+	checkpoint = 0;
 
 	VehicleInfo car;
 
@@ -184,7 +185,10 @@ update_status ModulePlayer::Update(float dt)
 	{
 		deaths++;
 		vehicle->vehicle->getRigidBody()->clearForces();
-		vehicle->SetTransform(&initial_matrix);
+		if (checkpoint == 0)
+			vehicle->SetTransform(&initial_matrix);
+		else
+			vehicle->SetTransform(&last_checkpoint_matrix);
 
 		//vehicle->SetPos(initial_matrix[12], initial_matrix[13], initial_matrix[14]);
 		//brake = BRAKE_POWER;

@@ -117,7 +117,7 @@ update_status ModuleInput::PreUpdate(float dt)
 				
 					if (e.jaxis.axis == 0)
 					{
-						if ((e.jaxis.value < -1280) || (e.jaxis.value > 1280))
+						if ((e.jaxis.value < -6400) || (e.jaxis.value > 6400))
 						{
 							if (e.jaxis.value < 0)
 							{

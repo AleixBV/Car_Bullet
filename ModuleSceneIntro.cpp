@@ -20,24 +20,15 @@ bool ModuleSceneIntro::Start()
 	App->camera->Move(vec3(1.0f, 1.0f, 0.0f));
 	App->camera->LookAt(vec3(0, 0, 0));
 
-	p.size = vec3(200, 0, 200);
+	p.size = vec3(2000, 0, 2000);
 	p.SetPos(0, 2.5f , 0);
 
 	plane = App->physics->AddBody(p, 0.0f);
 	plane->SetAsSensor(true);
 	plane->collision_listeners.add(this);
 
-	checkpoint = 0;
+	CreateCube(vec3(0, 37, 100), vec3(8, 10, 1), 0.0f, vec3(0, 0, 0), true);
 
-	sensor_cube.size = vec3(5, 3, 1);
-	sensor_cube.SetPos(0, 2.5f, 20);
-
-	s->getLast()->data->color.Set(0, 255, 0);
-
-	sensor->add(App->physics->AddBody(*s->getLast()->data, 0.0f));
-	sensor->getLast()->data->SetPos(0, 10.0f, 20.0f);
-	sensor->getLast()->data->SetAsSensor(true);
-	sensor->getLast()->data->collision_listeners.add(this);
 
 	CreateCube(vec3(0, 50, 0), vec3(10.0f, 1.0f, 30.0f));
 	CreateCube(vec3(0, 49.12f, 19.7f), vec3(10.0f, 1.0f, 10.0f), 10.0f, vec3(1, 0, 0));
@@ -105,8 +96,12 @@ update_status ModuleSceneIntro::Update(float dt)
 	floor.Render();
 
 	Cube* tmp;
-	s->at(checkpoint, tmp);
-	s->findNode(tmp)->data->Render();
+	if(s.at(App->player->checkpoint, tmp))
+		s.findNode(tmp)->data->Render();
+	else
+	{
+		//WIN!
+	}
 
 	//-----------------
 	for (p2List_item<Cube*>* tmp = cubes.getFirst(); tmp != NULL; tmp = tmp->next)
@@ -125,9 +120,17 @@ void ModuleSceneIntro::OnCollision(PhysBody3D* body1, PhysBody3D* body2)
 	{
 		App->player->reset = true;
 	}
+
+	PhysBody3D* tmp;
+	sensor.at((App->player->checkpoint), tmp);
+	if (body1 == tmp && body2 == App->player->vehicle)
+	{
+		App->player->checkpoint++;
+		App->player->vehicle->GetTransform(&App->player->last_checkpoint_matrix);
+	}
 }
 
-void ModuleSceneIntro::CreateCube(const vec3& position, const vec3& size, float angle, const vec3& rotAxis)
+void ModuleSceneIntro::CreateCube(const vec3& position, const vec3& size, float angle, const vec3& rotAxis, bool is_sensor)
 {
 	Cube* c = new Cube();
 	c->size.Set(size.x, size.y, size.z);
@@ -135,9 +138,19 @@ void ModuleSceneIntro::CreateCube(const vec3& position, const vec3& size, float 
 	if (angle != 0.0f)
 		c->SetRotation(angle, rotAxis);
 
-	App->physics->AddBody(*c, 0);
-
-	cubes.add(c);
+	if (is_sensor)
+	{
+		c->color.Set(0, 255, 0);
+		s.add(c);
+		sensor.add(App->physics->AddBody(*c, 0.0f));
+		sensor.getLast()->data->SetAsSensor(true);
+		sensor.getLast()->data->collision_listeners.add(this);
+	}
+	else
+	{
+		cubes.add(c);
+		App->physics->AddBody(*c, 0);
+	}
 }
 
 float ModuleSceneIntro::CalcAngle(const vec3& axis)
