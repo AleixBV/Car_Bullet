@@ -31,8 +31,8 @@ private:
 	void CreateCylinder(const vec3& position, float h, float radius, float angle = 0.0f, const vec3& rotAxis = vec3(1, 1, 1));
 	float CalcAngle(const vec3& axis);
 
-	Cube p;
-	PhysBody3D* plane;
+	Cube floor_cube;
+	PhysBody3D* floor_sensor;
 
 	p2List<Primitive*> primitives;
 };

@@ -20,12 +20,12 @@ bool ModuleSceneIntro::Start()
 	App->camera->Move(vec3(1.0f, 1.0f, 0.0f));
 	App->camera->LookAt(vec3(0, 0, 0));
 
-	p.size = vec3(DIAMETER_WORLD, 0, DIAMETER_WORLD);
-	p.SetPos(0, 2.5f , 0);
+	floor_cube.size = vec3(DIAMETER_WORLD, 0, DIAMETER_WORLD);
+	floor_cube.SetPos(0, 2.5f, 0);
 
-	plane = App->physics->AddBody(p, 0.0f);
-	plane->SetAsSensor(true);
-	plane->collision_listeners.add(this);
+	floor_sensor = App->physics->AddBody(floor_cube, 0.0f);
+	floor_sensor->SetAsSensor(true);
+	floor_sensor->collision_listeners.add(this);
 
 	CreateCube(vec3(0, 37, 100), vec3(6, 10, 1), 0.0f, vec3(0, 0, 0), true);
 
@@ -92,7 +92,7 @@ update_status ModuleSceneIntro::Update(float dt)
 {
 	//plane->GetTransform(&p.transform);
 	if (App->player->debug)
-		p.Render();
+		floor_cube.Render();
 
 	Plane floor(0, 1, 0, 0);
 	floor.axis = true;
@@ -125,7 +125,7 @@ void ModuleSceneIntro::OnCollision(PhysBody3D* body1, PhysBody3D* body2)
 {
 	LOG("Hit!");
 
-	if (body1 == plane && body2 == App->player->vehicle)
+	if (body1 == floor_sensor && body2 == App->player->vehicle)
 	{
 		App->player->reset = true;
 	}
