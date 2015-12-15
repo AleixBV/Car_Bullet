@@ -20,6 +20,8 @@ bool ModulePlayer::Start()
 	LOG("Loading player");
 
 	debug = false;
+	reset = false;
+	deaths = 0;
 
 	VehicleInfo car;
 
@@ -32,7 +34,7 @@ bool ModulePlayer::Start()
 	car.suspensionDamping = 0.88f;
 	car.maxSuspensionTravelCm = 1000.0f;
 	car.frictionSlip = 10.0f;
-	car.maxSuspensionForce = 6000.0f;
+	car.maxSuspensionForce = 12000.0f;
 
 	// Wheel properties ---------------------------------------
 	float connection_height = 1.2f;
@@ -88,7 +90,13 @@ bool ModulePlayer::Start()
 	car.wheels[2].steering = false;
 
 	vehicle = App->physics->AddVehicle(car);
+<<<<<<< HEAD
 	vehicle->SetPos(0, 52, 10);
+=======
+	vehicle->SetPos(0, 15, 10);
+
+	vehicle->GetTransform(&initial_matrix);
+>>>>>>> origin/master
 	
 	return true;
 }
@@ -106,7 +114,7 @@ update_status ModulePlayer::Update(float dt)
 {
 	turn = acceleration = brake = 0.0f;
 
-	if (App->input->GetKey(SDL_SCANCODE_SPACE) == KEY_REPEAT/* || (App->input->GetKey(SDL_SCANCODE_UP) == KEY_REPEAT && App->input->GetKey(SDL_SCANCODE_DOWN) == KEY_REPEAT) */||
+	if (App->input->GetKey(SDL_SCANCODE_SPACE) == KEY_REPEAT|| reset ||
 		App->input->GetJButton(8) == KEY_DOWN)
 	{
 		brake = BRAKE_POWER;
@@ -176,13 +184,25 @@ update_status ModulePlayer::Update(float dt)
 	else if (nitro < 99.9)
 		nitro += 0.1f;
 
+	if (reset && vehicle->GetKmh() < 0.5f && vehicle->GetKmh() > -0.5f)
+	{
+		deaths++;
+		vehicle->vehicle->getRigidBody()->clearForces();
+		vehicle->SetTransform(&initial_matrix);
+
+		//vehicle->SetPos(initial_matrix[12], initial_matrix[13], initial_matrix[14]);
+		//brake = BRAKE_POWER;
+
+		reset = false;
+	}
+
 	vehicle->ApplyEngineForce(acceleration);
 	vehicle->Turn(turn);
 	vehicle->Brake(brake);
 
 	vehicle->Render();
 
-	if (App->input->GetKey(SDL_SCANCODE_F1) == KEY_REPEAT)
+	if (App->input->GetKey(SDL_SCANCODE_F1) == KEY_DOWN)
 	{
 		debug = !debug;
 	}
@@ -193,7 +213,7 @@ update_status ModulePlayer::Update(float dt)
 	}
 
 	char title[80];
-	sprintf_s(title, "%.1f Km/h      %.1f nitro", vehicle->GetKmh(), nitro);
+	sprintf_s(title, "%.1f Km/h      %.1f nitro              %d deaths", vehicle->GetKmh(), nitro, deaths);
 	App->window->SetTitle(title);
 
 	return UPDATE_CONTINUE;

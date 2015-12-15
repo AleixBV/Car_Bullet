@@ -21,12 +21,16 @@ public:
 
 public:
 
+	bool debug;
 	PhysVehicle3D* vehicle;
 	float turn;
 	float acceleration;
 	float brake;
 	float nitro;
+	int deaths;
+	bool reset;
 
 private:
-	bool debug;
+	mat4x4 initial_matrix;
+	mat4x4 last_checkpoint_matrix;
 };

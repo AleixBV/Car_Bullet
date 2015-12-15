@@ -140,7 +140,7 @@ update_status ModuleInput::PreUpdate(float dt)
 
 					if (e.jaxis.axis == 5)
 					{
-						if (e.jaxis.value > -1280)
+						if (e.jaxis.value > -32000)
 							accel = ((float)e.jaxis.value + 32768) / 32767 / 2;
 						else
 							accel = 0;
@@ -148,7 +148,7 @@ update_status ModuleInput::PreUpdate(float dt)
 
 					if (e.jaxis.axis == 4)
 					{
-						if (e.jaxis.value > -1280)
+						if (e.jaxis.value > -32000)
 							deaccel = ((float)e.jaxis.value + 32768) / 32767 / 2;
 						else
 							deaccel = 0;

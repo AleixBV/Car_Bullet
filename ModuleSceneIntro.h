@@ -24,10 +24,15 @@ public:
 public:
 	Cube s;
 	PhysBody3D* sensor;
+<<<<<<< HEAD
 
 private:
 	void CreateCube(const vec3& position, const vec3& size, float angle = 0.0f, const vec3& rotAxis = vec3(1, 1, 1));
 	float CalcAngle(const vec3& axis);
+=======
+	Cube p;
+	PhysBody3D* plane;
+>>>>>>> origin/master
 
 	p2List<Cube*> cubes;
 };

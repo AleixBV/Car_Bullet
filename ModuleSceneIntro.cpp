@@ -20,6 +20,13 @@ bool ModuleSceneIntro::Start()
 	App->camera->Move(vec3(1.0f, 1.0f, 0.0f));
 	App->camera->LookAt(vec3(0, 0, 0));
 
+	p.size = vec3(200, 0, 200);
+	p.SetPos(0, 2.5f , 0);
+
+	plane = App->physics->AddBody(p, 0.0f);
+	plane->SetAsSensor(true);
+	plane->collision_listeners.add(this);
+
 	s.size = vec3(5, 3, 1);
 	s.SetPos(0, 2.5f, 20);
 
@@ -83,9 +90,14 @@ bool ModuleSceneIntro::CleanUp()
 // Update
 update_status ModuleSceneIntro::Update(float dt)
 {
-	Plane p(0, 1, 0, 0);
-	p.axis = true;
-	p.Render();
+	plane->GetTransform(&p.transform);
+	if (App->player->debug)
+		p.Render();
+
+	Plane floor(0, 1, 0, 0);
+	floor.axis = true;
+	floor.color.Set(255, 0, 0);
+	floor.Render();
 
 	sensor->GetTransform(&s.transform);
 	s.Render();
@@ -102,6 +114,11 @@ update_status ModuleSceneIntro::Update(float dt)
 void ModuleSceneIntro::OnCollision(PhysBody3D* body1, PhysBody3D* body2)
 {
 	LOG("Hit!");
+
+	if (body1 == plane && body2 == App->player->vehicle)
+	{
+		App->player->reset = true;
+	}
 }
 
 void ModuleSceneIntro::CreateCube(const vec3& position, const vec3& size, float angle, const vec3& rotAxis)
