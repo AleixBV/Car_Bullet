@@ -27,14 +27,8 @@ public:
 	p2List<PhysBody3D*> sensor;
 
 private:
-<<<<<<< HEAD
-	void CreateCube(const vec3& position, const vec3& size, float angle = 0.0f, const vec3& rotAxis = vec3(1, 1, 1));
 	void CreateSphere(const vec3& position, float radius);
-=======
 	void CreateCube(const vec3& position, const vec3& size, float angle = 0.0f, const vec3& rotAxis = vec3(1, 1, 1), bool sensor = false);
-	void CreateCylinder(const vec3& position, float h, float radius, float angle = 0.0f, const vec3& rotAxis = vec3(1, 1, 1));
-	float CalcAngle(const vec3& axis);
->>>>>>> origin/master
 
 	Cube floor_cube;
 	PhysBody3D* floor_sensor;
