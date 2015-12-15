@@ -32,7 +32,7 @@ bool ModulePlayer::Start()
 	car.suspensionDamping = 0.88f;
 	car.maxSuspensionTravelCm = 1000.0f;
 	car.frictionSlip = 10.0f;
-	car.maxSuspensionForce = 6000.0f;
+	car.maxSuspensionForce = 12000.0f;
 
 	// Wheel properties ---------------------------------------
 	float connection_height = 1.2f;
