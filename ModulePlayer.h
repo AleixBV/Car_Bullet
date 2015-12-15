@@ -26,7 +26,10 @@ public:
 	float acceleration;
 	float brake;
 	float nitro;
+	int deaths;
+	bool reset;
 
 private:
 	bool debug;
+	mat4x4 initial_matrix;
 };

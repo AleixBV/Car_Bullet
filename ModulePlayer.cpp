@@ -20,6 +20,8 @@ bool ModulePlayer::Start()
 	LOG("Loading player");
 
 	debug = false;
+	reset = false;
+	deaths = 0;
 
 	VehicleInfo car;
 
@@ -88,7 +90,9 @@ bool ModulePlayer::Start()
 	car.wheels[2].steering = false;
 
 	vehicle = App->physics->AddVehicle(car);
-	vehicle->SetPos(0, 12, 10);
+	vehicle->SetPos(0, 15, 10);
+
+	vehicle->GetTransform(&initial_matrix);
 	
 	return true;
 }
@@ -176,6 +180,14 @@ update_status ModulePlayer::Update(float dt)
 	else if (nitro < 99.9)
 		nitro += 0.1f;
 
+	if (reset)
+	{
+		deaths++;
+		vehicle->SetTransform(&initial_matrix);
+		//vehicle->SetPos(initial_matrix[12], initial_matrix[13], initial_matrix[14]);
+		reset = false;
+	}
+
 	vehicle->ApplyEngineForce(acceleration);
 	vehicle->Turn(turn);
 	vehicle->Brake(brake);
@@ -193,7 +205,7 @@ update_status ModulePlayer::Update(float dt)
 	}
 
 	char title[80];
-	sprintf_s(title, "%.1f Km/h      %.1f nitro", vehicle->GetKmh(), nitro);
+	sprintf_s(title, "%.1f Km/h      %.1f nitro              %d deaths", vehicle->GetKmh(), nitro, deaths);
 	App->window->SetTitle(title);
 
 	return UPDATE_CONTINUE;
