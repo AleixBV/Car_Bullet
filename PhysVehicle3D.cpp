@@ -54,7 +54,16 @@ void PhysVehicle3D::Render()
 	Cylinder handlebar(info.chassis_size.x*0.25f, info.chassis_size.y*1.5f);
 	//handlebar.SetRotation(90, vec3(0, 0, 1));
 	vehicle->getChassisWorldTransform().getOpenGLMatrix(&handlebar.transform);
-	handlebar.transform.rotate(90, vec3(handlebar.transform.M[8], handlebar.transform.M[9], handlebar.transform.M[10]));
+	//handlebar.transform.rotate(90, vec3(handlebar.transform.M[8], handlebar.transform.M[9], handlebar.transform.M[10]));
+	float t = handlebar.transform.M[0];
+	handlebar.transform.M[0] = -handlebar.transform.M[4];
+	handlebar.transform.M[4] = t;
+	t = handlebar.transform.M[1];
+	handlebar.transform.M[1] = -handlebar.transform.M[5];
+	handlebar.transform.M[5] = t;
+	t = handlebar.transform.M[2];
+	handlebar.transform.M[2] = -handlebar.transform.M[6];
+	handlebar.transform.M[6] = t;
 
 	btVector3 offset2(info.chassis_offset.x, info.chassis_offset.y*0.75f, info.chassis_offset.z + (info.chassis_size.z*0.5) + info.chassis_size.z*0.1f);
 	offset2 = offset2.rotate(q.getAxis(), q.getAngle());
