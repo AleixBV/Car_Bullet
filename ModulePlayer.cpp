@@ -185,18 +185,9 @@ update_status ModulePlayer::Update(float dt)
 		deaths++;
 		vehicle->vehicle->getRigidBody()->clearForces();
 		vehicle->SetTransform(&initial_matrix);
-		/*//vehicle->SetPos(initial_matrix[12], initial_matrix[13], initial_matrix[14]);
-		
-		for (int i = vehicle->vehicle->getNumWheels(); i < 0; i--)
-		{
-			//vehicle->vehicle->get
-		}
-		
-		brake = BRAKE_POWER;
 
-		//vehicle->vehicle->getRigidBody()->setInvInertiaDiagLocal(btVector3(0, 0, 0));
-
-		vehicle->vehicle->setCoordinateSystem(0, 0, 0);*/
+		//vehicle->SetPos(initial_matrix[12], initial_matrix[13], initial_matrix[14]);
+		//brake = BRAKE_POWER;
 
 		reset = false;
 	}
@@ -207,7 +198,7 @@ update_status ModulePlayer::Update(float dt)
 
 	vehicle->Render();
 
-	if (App->input->GetKey(SDL_SCANCODE_F1) == KEY_REPEAT)
+	if (App->input->GetKey(SDL_SCANCODE_F1) == KEY_DOWN)
 	{
 		debug = !debug;
 	}

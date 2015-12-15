@@ -68,8 +68,8 @@ bool ModuleSceneIntro::CleanUp()
 update_status ModuleSceneIntro::Update(float dt)
 {
 	plane->GetTransform(&p.transform);
-	//p.color.Set(0.0f, 0.0f, 0.0f, 0.0f);
-	//p.Render();
+	if (App->player->debug)
+		p.Render();
 
 	Plane floor(0, 1, 0, 0);
 	floor.axis = true;
