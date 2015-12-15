@@ -22,8 +22,10 @@ public:
 	void OnCollision(PhysBody3D* body1, PhysBody3D* body2);
 
 public:
-	Cube s;
-	PhysBody3D* sensor;
+	Cube sensor_cube;
+	p2List<Cube*>* s;
+	p2List<PhysBody3D*>* sensor;
+	unsigned int checkpoint;
 	Cube p;
 	PhysBody3D* plane;
 

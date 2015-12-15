@@ -27,12 +27,17 @@ bool ModuleSceneIntro::Start()
 	plane->SetAsSensor(true);
 	plane->collision_listeners.add(this);
 
-	s.size = vec3(5, 3, 1);
-	s.SetPos(0, 2.5f, 20);
+	checkpoint = 0;
 
-	sensor = App->physics->AddBody(s, 0.0f);
-	sensor->SetAsSensor(true);
-	sensor->collision_listeners.add(this);
+	sensor_cube.size = vec3(5, 3, 1);
+	sensor_cube.SetPos(0, 2.5f, 20);
+
+	s->getLast()->data->color.Set(0, 255, 0);
+
+	sensor->add(App->physics->AddBody(*s->getLast()->data, 0.0f));
+	sensor->getLast()->data->SetPos(0, 10.0f, 20.0f);
+	sensor->getLast()->data->SetAsSensor(true);
+	sensor->getLast()->data->collision_listeners.add(this);
 
 	cc1.size.Set(10.0f, 1.0f, 100.0f);
 	cc1.SetPos(0, 10, 0);
@@ -67,7 +72,7 @@ bool ModuleSceneIntro::CleanUp()
 // Update
 update_status ModuleSceneIntro::Update(float dt)
 {
-	plane->GetTransform(&p.transform);
+	//plane->GetTransform(&p.transform);
 	if (App->player->debug)
 		p.Render();
 
@@ -76,8 +81,9 @@ update_status ModuleSceneIntro::Update(float dt)
 	floor.color.Set(255, 0, 0);
 	floor.Render();
 
-	sensor->GetTransform(&s.transform);
-	s.Render();
+	Cube* tmp;
+	s->at(checkpoint, tmp);
+	s->findNode(tmp)->data->Render();
 
 	//-----------------
 	cc1.Render();
