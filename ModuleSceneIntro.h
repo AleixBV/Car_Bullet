@@ -27,8 +27,7 @@ public:
 
 private:
 	void CreateCube(const vec3& position, const vec3& size, float angle = 0.0f, const vec3& rotAxis = vec3(1, 1, 1));
-	void CreateCylinder(const vec3& position, float h, float radius, float angle = 0.0f, const vec3& rotAxis = vec3(1, 1, 1));
-	float CalcAngle(const vec3& axis);
+	void CreateSphere(const vec3& position, float radius);
 
 	Cube p;
 	PhysBody3D* plane;

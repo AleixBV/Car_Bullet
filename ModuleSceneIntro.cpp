@@ -35,44 +35,77 @@ bool ModuleSceneIntro::Start()
 	sensor->collision_listeners.add(this);
 
 	CreateCube(vec3(0, 50, 0), vec3(10.0f, 1.0f, 30.0f));
-	CreateCube(vec3(0, 49.12f, 19.7f), vec3(10.0f, 1.0f, 10.0f), 10.0f, vec3(1, 0, 0));
-	CreateCube(vec3(0, 46.92f, 29.28f), vec3(10.0f, 1.0f, 10.0f), 15.0f, vec3(1, 0, 0));
-	CreateCube(vec3(0, 44.22f, 38.88f), vec3(10.0f, 1.0f, 10.0f), 16.0f, vec3(1, 0, 0));
-	CreateCube(vec3(0, 41.42f, 48.42f), vec3(10.0f, 1.0f, 10.0f), 17.0f, vec3(1, 0, 0));
-	CreateCube(vec3(0, 38.32f, 57.9f), vec3(10.0f, 1.0f, 10.0f), 19.0f, vec3(1, 0, 0));
-	CreateCube(vec3(0, 35.44f, 67.42f), vec3(10.0f, 1.0f, 10.0f), 14.5855f, vec3(1, 0, 0));
-	CreateCube(vec3(0, 33.34f, 77.14f), vec3(10.0f, 1.0f, 10.0f), 9.4119f, vec3(1, 0, 0));
-	CreateCube(vec3(0, 32.07f, 87.0f), vec3(10.0f, 1.0f, 10.0f), 4.9394f, vec3(1, 0, 0));
-	CreateCube(vec3(0, 31.6f, 101.97f), vec3(10.0f, 1.0f, 20.0f));
-	//9
-	CreateCube(vec3(-0.67, 31.6f, 116.23), vec3(10.0f, 1.0f, 10.0f), -8.98, vec3(0, 1, 0));
-	CreateCube(vec3(-2.76, 31.6, 125.54), vec3(10.0f, 1.0f, 10.0f), -16.0787, vec3(0, 1, 0));
-	CreateCube(vec3(-5.64, 31.6f, 134.46), vec3(10.0f, 1.0f, 10.0f), -110.9619, vec3(0, 1, 0));
-	CreateCube(vec3(-9.37, 31.6f, 142.99), vec3(10.0f, 1.0f, 10.0f), -116.8159, vec3(0, 1, 0));
-	CreateCube(vec3(-14.22, 31.6f, 150.98), vec3(10.0f, 1.0f, 10.0f), -123.727, vec3(0, 1, 0));
-	CreateCube(vec3(-19.76, 31.6f, 158.7), vec3(10.0f, 1.0f, 10.0f), -127.6666, vec3(0, 1, 0));
-	CreateCube(vec3(-26.07, 31.6f, 165.69), vec3(10.0f, 1.0f, 10.0f), -134.889, vec3(0, 1, 0));
-	CreateCube(vec3(-33.21, 31.6f, 172.29), vec3(10.0f, 1.0f, 10.0f), -138.8494, vec3(0, 1, 0));
-	CreateCube(vec3(-40.11, 31.6f, 177.13), vec3(10.0f, 1.0f, 10.0f), -153.0961, vec3(0, 1, 0));
-	CreateCube(vec3(-48.4, 31.6f, 180.31), vec3(10.0f, 1.0f, 10.0f), -75.0569, vec3(0, 1, 0));
-	CreateCube(vec3(-56.6, 31.6, 181.4), vec3(10.0f, 1.0f, 10.0f));
+	//0
+	CreateCube(vec3(0, 49.16, 19.7f), vec3(10.0f, 1.0f, 10.0f), 10.0f, vec3(1, 0, 0));
+	CreateCube(vec3(0, 47.04, 29.28f), vec3(10.0f, 1.0f, 10.0f), 15.0f, vec3(1, 0, 0));
+	CreateCube(vec3(0, 44.39, 38.93), vec3(10.0f, 1.0f, 10.0f), 16.0f, vec3(1, 0, 0));
+	CreateCube(vec3(0, 41.58, 48.4), vec3(10.0f, 1.0f, 10.0f), 17.0f, vec3(1, 0, 0));
+	CreateCube(vec3(0, 38.5, 57.88), vec3(10.0f, 1.0f, 10.0f), 19.0f, vec3(1, 0, 0));
+	//5
+	CreateCube(vec3(0, 35.59, 67.45), vec3(10.0f, 1.0f, 10.0f), 14.5855f, vec3(1, 0, 0));
+	CreateCube(vec3(0, 33.5, 77.13), vec3(10.0f, 1.0f, 10.0f), 9.4119f, vec3(1, 0, 0));
+	CreateCube(vec3(0, 32.31, 86.76), vec3(10.0f, 1.0f, 10.0f), 4.9394f, vec3(1, 0, 0));
+	CreateCube(vec3(0, 31.84, 101.7), vec3(10.0f, 1.0f, 20.0f));
+	CreateCube(vec3(-0.7, 31.84, 115.75), vec3(10.0f, 1.0f, 10.0f), -8.98, vec3(0, 1, 0));
+	//10
+	CreateCube(vec3(-2.75, 31.84, 124.54), vec3(10.0f, 1.0f, 10.0f), -16.0787, vec3(0, 1, 0));
+	CreateCube(vec3(-5.76, 31.84f, 133.51), vec3(10.0f, 1.0f, 10.0f), -110.9619, vec3(0, 1, 0));
+	CreateCube(vec3(-9.6, 31.84f, 142.26), vec3(10.0f, 1.0f, 10.0f), -116.8159, vec3(0, 1, 0));
+	CreateCube(vec3(-14.29, 31.84f, 150.39), vec3(10.0f, 1.0f, 10.0f), -123.727, vec3(0, 1, 0));
+	CreateCube(vec3(-19.96, 31.84f, 158.02), vec3(10.0f, 1.0f, 10.0f), -129.9672, vec3(0, 1, 0));
+	//15
+	CreateCube(vec3(-26.36, 31.84f, 164.65), vec3(10.0f, 1.0f, 10.0f), -138.3579, vec3(0, 1, 0));
+	CreateCube(vec3(-33.58, 31.84f, 170.26), vec3(10.0f, 1.0f, 10.0f), -147.1527, vec3(0, 1, 0));//
+	CreateCube(vec3(-41.84, 31.84f, 175.07), vec3(10.0f, 1.0f, 10.0f), -153.0961, vec3(0, 1, 0));
+	CreateCube(vec3(-50.16, 31.84f, 178.22), vec3(10.0f, 1.0f, 10.0f), -75.0569, vec3(0, 1, 0));
+	CreateCube(vec3(-68.01, 31.15, 179.33), vec3(10.0f, 1.0f, 10.0f), 7.8374, vec3(0, 0, 1));
 	//20
-	CreateCube(vec3(-66.45, 30.93, 181.4), vec3(10.0f, 1.0f, 10.0f), 7.8374, vec3(0, 0, 1));
-	CreateCube(vec3(-76.18, 29.53, 181.4), vec3(10.0f, 1.0f, 10.0f), 7.9516, vec3(0, 0, 1));
-	CreateCube(vec3(-85.81, 28.39, 181.4), vec3(10.0f, 1.0f, 10.0f), 4.6115, vec3(0, 0, 1));
-	CreateCube(vec3(-95.03, 28.01, 181.4), vec3(10.0f, 1.0f, 10.0f));
-	CreateCube(vec3(-104.6, 28.01, 181.4), vec3(10.0f, 1.0f, 10.0f));
-	
-	CreateCube(vec3(-114.38, 28, 181.4), vec3(10.0f, 1.0f, 10.0f));
-	CreateCube(vec3(-123.1, 28, 181.4), vec3(10.0f, 1.0f, 10.0f));
-	CreateCube(vec3(-133, 28.1, 181.4), vec3(10.0f, 1.0f, 10.0f), -1.6354, vec3(0, 0, 1));
-	CreateCube(vec3(-142.6, 29.7, 181.4), vec3(10.0f, 1.0f, 10.0f), -16.8073, vec3(0, 0, 1));
-	CreateCube(vec3(-151.9, 33.1, 181.4), vec3(10.0f, 1.0f, 10.0f), -23.6733, vec3(0, 0, 1));
-	CreateCube(vec3(-160.7, 37.1, 181.4), vec3(10.0f, 1.0f, 10.0f), -24.8817, vec3(0, 0, 1));
+	CreateCube(vec3(-58.19, 31.84, 179.33), vec3(10.0f, 1.0f, 10.0f));
+	CreateCube(vec3(-77.65, 29.77, 179.33), vec3(10.0f, 1.0f, 10.0f), 7.9516, vec3(0, 0, 1));
+	CreateCube(vec3(-86.6, 28.76, 179.33), vec3(10.0f, 1.0f, 10.0f), 4.6115, vec3(0, 0, 1));
+	//23
+	CreateCube(vec3(-109.34, 28.36, 179.33), vec3(35.61924, 1.0f, 10.0f));//27
+	CreateCube(vec3(-132.04, 28.52, 179.33), vec3(10.0f, 1.0f, 10.0f), -1.6354, vec3(0, 0, 1));//28
+	CreateCube(vec3(-141.63, 30.09, 179.33), vec3(10.0f, 1.0f, 10.0f), -16.8073, vec3(0, 0, 1));
+	CreateCube(vec3(-150.94, 33.51, 179.33), vec3(10.0f, 1.0f, 10.0f), -23.6733, vec3(0, 0, 1));//
 	//30
-	CreateCube(vec3(-349, 42.9, 181.52), vec3(320, 1.0, 50));
-	CreateCube(vec3(-349, 55, 155.7), vec3(320, 25, 1.0f));
-	CreateCube(vec3(-349, 55, 207.2), vec3(320, 25, 1.0f));
+	CreateCube(vec3(-159.97, 37.59, 179.33), vec3(10, 1, 10), -24.8817, vec3(0, 0, 1)); // End of first ramp
+	CreateCube(vec3(-349.5, 42.6, 181.7), vec3(320, 1, 50));
+	CreateCube(vec3(-349.5, 54.6, 155.7), vec3(320, 25, 1));
+	CreateCube(vec3(-349.5, 54.6, 207.7), vec3(320, 25, 1));
+	CreateCube(vec3(-508.5, 54.6, 21.7), vec3(1, 25, 268.4883));
+	//35
+	CreateCube(vec3(-560.5, 54.6, 47.7), vec3(1, 25, 320));
+	CreateCube(vec3(-534.5, 42.6, 47.7), vec3(50, 1, 320));
+	CreateCube(vec3(-534.5, 54.6, 207.7), vec3(51.63527, 25, 1));//38r
+	CreateCube(vec3(-534.5, 51.6, 32.7), vec3(10, 1, 100), 10.1549, vec3(1, 0, 0));//38
+	CreateCube(vec3(-534.5, 64.6, -42.3), vec3(10, 1, 55.37737), 9.596, vec3(1, 0, 0));
+	CreateCube(vec3(-534.5, 69.6, -144.3), vec3(20, 1, 150));
+	//40
+	CreateCube(vec3(-534.5, 42.6, -149.3), vec3(40, 1, 75));
+	CreateCube(vec3(-534.5, 42.6, -211.3), vec3(25, 1, 50));
+	CreateCube(vec3(-534.5, 42.6, -294.3), vec3(15, 1, 117.1603));
+	CreateCube(vec3(-534.5, 69.6, -242.3), vec3(60, 1, 49.29916));
+	CreateCube(vec3(-556.5, 69.6, -294.3), vec3(15, 1, 117.1603));
+	//45
+	CreateCube(vec3(-512.5, 69.6, -294.3), vec3(15, 1, 117.1603));
+	CreateCube(vec3(-550.5, 69.6, -369.3), vec3(15, 1, 39.27095), -18.2262, vec3(0, 1, 0));//48
+	CreateCube(vec3(-518.5, 69.6, -369.3), vec3(15, 1, 39.27095), 18.2262, vec3(0, 1, 0));//49
+	CreateCube(vec3(-541.5, 69.6, -392.3), vec3(15, 1, 17.55126), -31.3407, vec3(0, 1, 0));//50
+	//50
+	CreateCube(vec3(-527.5, 69.6, -392.3), vec3(15, 1, 17.55126), 31.3407, vec3(0, 1, 0));
+	CreateCube(vec3(-534.5, 69.6, -412.3), vec3(20, 1, 31.76958));
+	CreateCube(vec3(-534.5, 42.6, -469.3), vec3(10, 1, 240.2195));
+	CreateCube(vec3(-534.5, 70.39, -435.3), vec3(20, 1, 15.75972), 6.138, vec3(1, 0, 0));
+	CreateCube(vec3(-534.5, 72.6, -450.3), vec3(20, 1, 15.75972), 10.67, vec3(1, 0, 0));
+	//55
+	CreateCube(vec3(-534.5, 75.91, -465.3), vec3(20, 1, 15.75972), 14.54, vec3(1, 0, 0));
+
+	//Sphere
+	CreateSphere(vec3(-213.5, 42.6, 203.7), 15);
+	CreateSphere(vec3(-284.5, 42.6, 165.7), 15);
+	CreateSphere(vec3(-337.5, 42.6, 188.7), 15);
+	CreateSphere(vec3(-407.5, 42.6, 167.7), 15);
 
 	return ret;
 }
@@ -138,21 +171,13 @@ void ModuleSceneIntro::CreateCube(const vec3& position, const vec3& size, float 
 	primitives.add(c);
 }
 
-void ModuleSceneIntro::CreateCylinder(const vec3& position, float h, float radius, float angle, const vec3& rotAxis)
+void ModuleSceneIntro::CreateSphere(const vec3& position, float radius)
 {
-	Cylinder* c = new Cylinder();
-	c->height = h;
+	Sphere* c = new Sphere();
 	c->radius = radius;
 	c->SetPos(position.x, position.y, position.z);
-	if (angle != 0.0f)
-		c->SetRotation(angle, rotAxis);
 
 	App->physics->AddBody(*c, 0);
 
 	primitives.add(c);
-}
-
-float ModuleSceneIntro::CalcAngle(const vec3& axis)
-{
-	return (float)sqrt((axis.x * axis.x) + (axis.y * axis.y) + (axis.z * axis.z));
 }
