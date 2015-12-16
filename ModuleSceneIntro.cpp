@@ -102,6 +102,8 @@ bool ModuleSceneIntro::Start()
 	//55
 	CreateCube(vec3(-534.5, 75.91, -465.3), vec3(20, 1, 15.75972), 14.54, vec3(1, 0, 0));
 
+	CreateCube(vec3(-534.5, 72.6, -589.3), vec3(46, 60, 1), 0.0f, vec3(0, 0, 0), true);//4t checkpoint
+
 	//Sphere
 	CreateSphere(vec3(-213.5, 42.6, 203.7), 15);
 	CreateSphere(vec3(-284.5, 42.6, 165.7), 15);
