@@ -21,8 +21,13 @@ bool ModulePlayer::Start()
 
 	debug = false;
 	reset = false;
-	deaths = 0; 
 	checkpoint = 0;
+
+	deaths = 0;
+	last_deaths = 0;
+	time = 0.0f;
+	last_time = 0.0f;
+	time_to_start = 0.0f;
 
 	VehicleInfo car;
 
@@ -110,6 +115,16 @@ bool ModulePlayer::CleanUp()
 update_status ModulePlayer::Update(float dt)
 {
 	turn = acceleration = brake = 0.0f;
+
+	if (last_time == 0.0f)
+	{
+		if (time_to_start == 0.0f)
+			time_to_start = SDL_GetTicks();
+
+		last_time = SDL_GetTicks() - time_to_start;
+	}//for better time accuracy
+
+	time = SDL_GetTicks() - last_time;
 
 	if (App->input->GetKey(SDL_SCANCODE_SPACE) == KEY_REPEAT|| reset ||
 		App->input->GetJButton(8) == KEY_DOWN)
@@ -202,14 +217,27 @@ update_status ModulePlayer::Update(float dt)
 
 	if (reset)
 	{
-		deaths++;
 		vehicle->vehicle->getRigidBody()->clearForces();
 		vehicle->vehicle->getRigidBody()->clearVelocities();
 
-		if (checkpoint == 0)
+		if (checkpoint == -1)
+		{
+			last_time = time;
+			last_deaths = deaths;
+			deaths = 0;
+			checkpoint = 0;
+
 			vehicle->SetTransform(&initial_matrix);
+		}
 		else
-			vehicle->SetTransform(&last_checkpoint_matrix);
+		{
+			deaths++;
+
+			if (checkpoint == 0)
+				vehicle->SetTransform(&initial_matrix);
+			else
+				vehicle->SetTransform(&last_checkpoint_matrix);
+		}
 
 		reset = false;
 	}
@@ -230,8 +258,8 @@ update_status ModulePlayer::Update(float dt)
 		App->camera->bodyToFollow = vehicle;
 	}
 
-	char title[80];
-	sprintf_s(title, "%.1f Km/h      %.1f nitro              %d deaths", vehicle->GetKmh(), nitro, deaths);
+	char title[150];
+	sprintf_s(title, "%.1f Km/h   %.1f nitro   timer %.1f s    %d deaths   |   last time %.1f s   %d last deaths", vehicle->GetKmh(), nitro, time / 1000, deaths, last_time / 1000, last_deaths);
 	App->window->SetTitle(title);
 
 	return UPDATE_CONTINUE;

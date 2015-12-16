@@ -149,7 +149,9 @@ update_status ModuleSceneIntro::Update(float dt)
 		s.findNode(tmp)->data->Render();
 	else
 	{
-		LOG("Win!!");//Ficar que retorni a l'inici i es guardin el last_time i el _last deaths per a poder-ho repetir
+		LOG("Win!!");
+		App->player->checkpoint = -1;
+		App->player->reset = true;
 	}
 
 	//-----------------
@@ -189,7 +191,7 @@ void ModuleSceneIntro::CreateCube(const vec3& position, const vec3& size, float 
 
 	if (is_sensor)
 	{
-		c->color.Set(0, 255, 0, 0.05f);
+		c->color.Set(0, 255, 0, 0.5f);
 		s.add(c);
 		sensor.add(App->physics->AddBody(*c, 0.0f));
 		sensor.getLast()->data->SetAsSensor(true);

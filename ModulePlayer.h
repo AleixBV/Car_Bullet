@@ -28,10 +28,14 @@ public:
 	float brake;
 	float nitro;
 	int deaths;
+	int last_deaths;
+	float time;
+	float last_time;
+	float time_to_start;
 	bool reset;
 	unsigned int reset_timer;
 	mat4x4 last_checkpoint_matrix;
-	unsigned int checkpoint;
+	int checkpoint;
 
 private:
 	mat4x4 initial_matrix;
