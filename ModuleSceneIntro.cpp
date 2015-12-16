@@ -149,7 +149,7 @@ update_status ModuleSceneIntro::Update(float dt)
 		s.findNode(tmp)->data->Render();
 	else
 	{
-		LOG("Win!!");
+		LOG("Win!!");//Ficar que retorni a l'inici i es guardin el last_time i el _last deaths per a poder-ho repetir
 	}
 
 	//-----------------
