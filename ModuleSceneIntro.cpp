@@ -124,6 +124,18 @@ bool ModuleSceneIntro::CleanUp()
 	}
 	primitives.clear();
 
+	for (p2List_item<Cube*>* tmp = s.getFirst(); tmp != NULL; tmp = tmp->next)
+	{
+		delete tmp->data;
+	}
+	s.clear();
+
+	/*for (p2List_item<PhysBody3D*>* tmp = sensor.getFirst(); tmp != NULL; tmp = tmp->next)
+	{
+		delete tmp->data;//Ja es netegen els collisionObjects
+	}*/
+	sensor.clear();
+
 	return true;
 }
 
