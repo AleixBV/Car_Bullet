@@ -142,12 +142,13 @@ bool ModuleSceneIntro::CleanUp()
 // Update
 update_status ModuleSceneIntro::Update(float dt)
 {
-	//plane->GetTransform(&p.transform);
-	if (App->player->debug)
-		floor_cube.Render();
-
 	Plane floor(0, 1, 0, 0);
-	floor.axis = true;
+	if (App->player->debug)
+	{
+		floor_cube.Render();
+		floor.axis = true;
+	}
+
 	floor.color.Set(255, 0, 0);
 	//-----------------
 	mat4x4 player_pos;
