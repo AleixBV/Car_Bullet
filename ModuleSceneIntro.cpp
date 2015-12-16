@@ -66,6 +66,10 @@ bool ModuleSceneIntro::Start()
 	CreateCube(vec3(-150.94, 33.51, 179.33), vec3(10.0f, 1.0f, 10.0f), -23.6733, vec3(0, 0, 1));//
 	//30
 	CreateCube(vec3(-159.97, 37.59, 179.33), vec3(10, 1, 10), -24.8817, vec3(0, 0, 1)); // End of first ramp
+
+
+	CreateCube(vec3(-195, 42.6 + 6, 181.7), vec3(1, 12, 46), 0.0f, vec3(0, 0, 0), true);
+
 	CreateCube(vec3(-349.5, 42.6, 181.7), vec3(320, 1, 50));
 	CreateCube(vec3(-349.5, 54.6, 155.7), vec3(320, 25, 1));
 	CreateCube(vec3(-349.5, 54.6, 207.7), vec3(320, 25, 1));
