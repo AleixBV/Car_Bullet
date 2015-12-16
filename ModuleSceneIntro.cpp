@@ -27,7 +27,7 @@ bool ModuleSceneIntro::Start()
 	floor_sensor->SetAsSensor(true);
 	floor_sensor->collision_listeners.add(this);
 
-	CreateCube(vec3(0, 37, 100), vec3(6, 10, 1), 0.0f, vec3(0, 0, 0), true);
+	CreateCube(vec3(0, 37, 100), vec3(6, 10, 1), 0.0f, vec3(0, 0, 0), true); //1r checkpoint
 
 
 	CreateCube(vec3(0, 50, 0), vec3(10.0f, 1.0f, 30.0f));
@@ -68,7 +68,7 @@ bool ModuleSceneIntro::Start()
 	CreateCube(vec3(-159.97, 37.59, 179.33), vec3(10, 1, 10), -24.8817, vec3(0, 0, 1)); // End of first ramp
 
 
-	CreateCube(vec3(-195, 42.6 + 6, 181.7), vec3(1, 12, 46), 0.0f, vec3(0, 0, 0), true);
+	CreateCube(vec3(-195, 42.6 + 6, 181.7), vec3(1, 12, 46), 0.0f, vec3(0, 0, 0), true);//2n checkpoint
 
 	CreateCube(vec3(-349.5, 42.6, 181.7), vec3(320, 1, 50));
 	CreateCube(vec3(-349.5, 54.6, 155.7), vec3(320, 25, 1));
@@ -79,6 +79,7 @@ bool ModuleSceneIntro::Start()
 	CreateCube(vec3(-534.5, 42.6, 47.7), vec3(50, 1, 320));
 	CreateCube(vec3(-534.5, 54.6, 207.7), vec3(51.63527, 25, 1));//38r
 	CreateCube(vec3(-534.5, 51.6, 32.7), vec3(10, 1, 100), 10.1549, vec3(1, 0, 0));//38
+	CreateCube(vec3(-534.5, 57.6, -42.3), vec3(46, 30, 1), 0.0f, vec3(0, 0, 0), true);//3r checkpoint
 	CreateCube(vec3(-534.5, 64.6, -42.3), vec3(10, 1, 55.37737), 9.596, vec3(1, 0, 0));
 	CreateCube(vec3(-534.5, 69.6, -144.3), vec3(20, 1, 150));
 	//40
@@ -186,7 +187,7 @@ void ModuleSceneIntro::CreateCube(const vec3& position, const vec3& size, float 
 
 	if (is_sensor)
 	{
-		c->color.Set(0, 255, 0);
+		c->color.Set(0, 255, 0, 0.05f);
 		s.add(c);
 		sensor.add(App->physics->AddBody(*c, 0.0f));
 		sensor.getLast()->data->SetAsSensor(true);
