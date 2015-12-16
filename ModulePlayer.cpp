@@ -238,6 +238,7 @@ update_status ModulePlayer::Update(float dt)
 				vehicle->SetTransform(&last_checkpoint_matrix);
 		}
 
+		nitro = 100.0f;
 		reset = false;
 	}
 
