@@ -17,3 +17,5 @@ Debug mode with F1.
 Return to last checkpoint holding F9 or SELECT of a controller.
 
 In debug mode you can move the camera with the mouse, W, A, S, D, R and F.
+
+Now just try to improve your time and remember to keep your eyes on the road!!! :)
