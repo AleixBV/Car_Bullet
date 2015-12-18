@@ -288,7 +288,7 @@ PhysVehicle3D* ModulePhysics3D::AddVehicle(const VehicleInfo& info)
 	btTransform startTransform;
 	startTransform.setIdentity();
 
-	btVector3 localInertia(0, 0, 0);
+	btVector3 localInertia(0, 0, -1.35);
 	comShape->calculateLocalInertia(info.mass, localInertia);
 
 	btDefaultMotionState* myMotionState = new btDefaultMotionState(startTransform);

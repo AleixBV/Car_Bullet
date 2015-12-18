@@ -8,7 +8,7 @@
 ModulePlayer::ModulePlayer(Application* app, bool start_enabled) : Module(app, start_enabled), vehicle(NULL)
 {
 	turn = acceleration = brake = 0.0f;
-	nitro = 100.0f;
+	nitro = 50.0;
 }
 
 ModulePlayer::~ModulePlayer()
@@ -35,7 +35,7 @@ bool ModulePlayer::Start()
 	car.chassis_size.Set(2, 1, 4);
 	car.chassis_offset.Set(0, 1.5, 0);
 	car.mass = 400.0f;
-	car.suspensionStiffness = 15.88f;
+	car.suspensionStiffness = 20.0f;
 	car.suspensionCompression = 0.83f;
 	car.suspensionDamping = 0.88f;
 	car.maxSuspensionTravelCm = 1000.0f;
@@ -250,9 +250,18 @@ update_status ModulePlayer::Update(float dt)
 				vehicle->SetTransform(&last_checkpoint_matrix);
 		}
 
-		nitro = 100.0f;
+		nitro = 50.0;
 		reset = false;
 	}
+
+	/*if (acceleration != 0)
+	{
+		if (vehicle->GetKmh() > 20)
+			acceleration = acceleration / (vehicle->GetKmh() / 20);
+
+		else if (vehicle->GetKmh() < -20)
+			acceleration = acceleration / (-vehicle->GetKmh() / 20);
+	}*/
 
 	vehicle->ApplyEngineForce(acceleration);
 	vehicle->Turn(turn);
