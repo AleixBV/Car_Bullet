@@ -63,9 +63,9 @@ bool ModuleSceneIntro::Start()
 	CreateCube(vec3(-109.34, 28.75, 179.33), vec3(35.61924, 1.0f, 10.0f), 1.5, vec3(0, 0, 1));//27
 	CreateCube(vec3(-132.04, 28.48, 179.33), vec3(10.0f, 1.0f, 10.0f), -2, vec3(0, 0, 1));//28
 	CreateCube(vec3(-141.63, 30.09, 179.33), vec3(10.0f, 1.0f, 10.0f), -16.8073, vec3(0, 0, 1));
-	CreateCube(vec3(-150.94, 33.51, 179.33), vec3(10.0f, 1.0f, 10.0f), -23.6733, vec3(0, 0, 1));//
+	CreateCube(vec3(-150.94, 32.92, 179.33), vec3(10.0f, 1.0f, 10.0f), -17, vec3(0, 0, 1));//
 	//30
-	CreateCube(vec3(-159.97, 37.59, 179.33), vec3(10, 1, 10), -24.8817, vec3(0, 0, 1)); // End of first ramp
+	CreateCube(vec3(-159.97, 35.52, 179.33), vec3(10, 1, 10), -15, vec3(0, 0, 1)); // End of first ramp
 
 
 	CreateCube(vec3(-195, 42.6 + 8, 181.7), vec3(1, 16, 46), 0.0f, vec3(0, 0, 0), true);//2n checkpoint
@@ -96,7 +96,7 @@ bool ModuleSceneIntro::Start()
 	//50
 	CreateCube(vec3(-527.5, 69.6, -392.3), vec3(15, 1, 17.55126), 31.3407, vec3(0, 1, 0));
 	CreateCube(vec3(-534.5, 69.6, -412.3), vec3(20, 1, 31.76958));
-	CreateCube(vec3(-534.5, 42.6, -469.3), vec3(10, 1, 240.2195));
+	CreateCube(vec3(-534.5, 42.6, -469.3), vec3(7.5, 1, 240.2195));
 	CreateCube(vec3(-534.5, 70.39, -435.3), vec3(20, 1, 15.75972), 6.138, vec3(1, 0, 0));
 	CreateCube(vec3(-534.5, 72.6, -450.3), vec3(20, 1, 15.75972), 10.67, vec3(1, 0, 0));
 	//55
