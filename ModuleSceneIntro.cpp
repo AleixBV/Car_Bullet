@@ -71,11 +71,11 @@ bool ModuleSceneIntro::Start()
 	CreateCube(vec3(-195, 42.6 + 6, 181.7), vec3(1, 12, 46), 0.0f, vec3(0, 0, 0), true);//2n checkpoint
 
 	CreateCube(vec3(-349.5, 42.6, 181.7), vec3(320, 1, 50));
-	CreateCube(vec3(-349.5, 54.6, 155.7), vec3(320, 25, 1));
-	CreateCube(vec3(-349.5, 54.6, 207.7), vec3(320, 25, 1));
-	CreateCube(vec3(-508.5, 54.6, 21.7), vec3(1, 25, 268.4883));
+	CreateCube(vec3(-349.5, 54.6, 156.7), vec3(320, 25, 1));
+	CreateCube(vec3(-349.5, 54.6, 206.7), vec3(320, 25, 1));
+	CreateCube(vec3(-509.5, 54.6, 21.7), vec3(1, 25, 268.4883));
 	//35
-	CreateCube(vec3(-560.5, 54.6, 47.7), vec3(1, 25, 320));
+	CreateCube(vec3(-559.5, 54.6, 47.7), vec3(1, 25, 320));
 	CreateCube(vec3(-534.5, 42.6, 47.7), vec3(50, 1, 320));
 	CreateCube(vec3(-534.5, 54.6, 207.7), vec3(51.63527, 25, 1));//38r
 	CreateCube(vec3(-534.5, 51.6, 32.7), vec3(10, 1, 100), 10.1549, vec3(1, 0, 0));//38
@@ -106,7 +106,7 @@ bool ModuleSceneIntro::Start()
 
 	//Sphere
 	CreateSphere(vec3(-213.5, 42.6, 203.7), 15);
-	CreateSphere(vec3(-284.5, 42.6, 165.7), 15);
+	CreateSphere(vec3(-284.5, 42.6, 163.7), 15);
 	CreateSphere(vec3(-337.5, 42.6, 188.7), 15);
 	CreateSphere(vec3(-407.5, 42.6, 167.7), 15);
 
